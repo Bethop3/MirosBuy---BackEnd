@@ -1,8 +1,9 @@
+// routes/productos.js
 const express = require("express");
 const router = express.Router();
-const productosController = require("../controllers/productosController");
+const { descargarProductosCSV } = require("../controllers/productosController");
+const { verificarToken } = require("../middlewares/authMiddleware");
 
-// Ruta: GET /api/productos
-router.get("/", productosController.obtenerProductos);
+router.get("/exportar-csv", verificarToken, descargarProductosCSV);
 
 module.exports = router;
